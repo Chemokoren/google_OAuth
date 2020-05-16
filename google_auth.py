@@ -6,6 +6,7 @@ import flask
 from authlib.client import OAuth2Session
 import google.oauth2.credentials
 import googleapiclient.discovery
+from flask.json import jsonify
 
 ACCESS_TOKEN_URI = 'https://www.googleapis.com/oauth2/v4/token'
 AUTHORIZATION_URL = 'https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent'
@@ -97,4 +98,4 @@ def logout():
     flask.session.pop(AUTH_TOKEN_KEY, None)
     flask.session.pop(AUTH_STATE_KEY, None)
 
-    return flask.redirect(BASE_URI, code=302)
+    return jsonify({'message':'You have been logged out.'})
